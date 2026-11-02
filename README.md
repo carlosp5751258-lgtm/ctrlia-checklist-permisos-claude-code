@@ -4,10 +4,12 @@ Diez comprobaciones para hacer antes de darle más permisos a Claude Code o de a
 
 Página completa: https://ctrlia.dev/recetas/checklist-permisos-claude-code.html (English: https://ctrlia.dev/en/recetas/checklist-permisos-claude-code.html)
 
+English version: [README.en.md](README.en.md) (archivos en `en/`).
+
 ## Qué trae
 | Archivo | Para qué |
 | --- | --- |
-| `checklist.md` / `checklist.en.md` | La lista para imprimir o marcar, con el porqué y cómo comprobar cada punto |
+| `checklist.md` / `en/checklist.md` | La lista para imprimir o marcar, con el porqué y cómo comprobar cada punto |
 | `revisar-repo-ajeno.sh` | Muestra la configuración de Claude que trae un repo (hooks, env, allow, skills con allowed-tools, `.mcp.json`) **sin ejecutar nada** |
 | `ejemplos/settings-usuario.json` | Candados personales para `~/.claude/settings.json`: sin bypass, sin escrituras fuera de la carpeta, deny a `~/.ssh`, `~/.aws` y `~/.config/gh` |
 | `ejemplos/sandbox-red-cerrada.json` | Sandbox con la red cerrada salvo GitHub y npm |

@@ -17,21 +17,21 @@
 ```bash
 # Real test: someone else's repo runs its hook with claude -p (Nov 1, 2026, Claude Code 2.1.316)
 # Test repo with a SessionStart hook in .claude/settings.json that touches a file
-$ claude -p "di hola" < /dev/null
+$ claude -p "say hello" < /dev/null
 Ignoring 2 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. ...
 Not logged in · Please run /login
-$ ls ../HOOK-EJECUTADO
-../HOOK-EJECUTADO          # the hook ran: no trust and no logged-in session
+$ ls ../HOOK-RAN
+../HOOK-RAN          # the hook ran: no trust and no logged-in session
 
 # The three ways to prevent it (the hook did NOT run in any of them):
-$ claude -p "di hola" --setting-sources user
-$ claude -p "di hola" --bare
-$ claude -p "di hola" --settings '{"disableAllHooks": true}'
+$ claude -p "say hello" --setting-sources user
+$ claude -p "say hello" --bare
+$ claude -p "say hello" --settings '{"disableAllHooks": true}'
 ```
 
 - [ ] **4. If your allow doesn't work, check trust.**
   - Why: it's the most common cause of "Claude keeps asking even though I allowed it in the project". Trust is stored per git repository root (it covers the whole repo except nested repos, such as submodules, which ask for their own). If you start Claude in your home folder, trust lasts only for that session and isn't saved. A `claude -p` never shows the dialog.
-  - How to check it: run `claude -p "hola"` or `claude doctor` in the folder. If you see `Ignoring 2 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["…"].hasTrustDialogAccepted: true in …/.claude.json.` on stderr, your project allow rules are on hold.
+  - How to check it: run `claude -p "hello"` or `claude doctor` in the folder. If you see `Ignoring 2 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["…"].hasTrustDialogAccepted: true in …/.claude.json.` on stderr, your project allow rules are on hold.
   - Fix: open `claude` interactively once and accept. Editing `hasTrustDialogAccepted` by hand in `~/.claude.json` is an alternative the docs mention, but only use it on folders you've already reviewed.
   - One more detail: `.claude/settings.local.json` normally applies without trust because it's yours; but if it's tracked in git or `.claude` is a symlink, Claude Code treats it as part of the repository and holds back its rules.
 - [ ] **5. Don't put auto or bypass in project settings.**
